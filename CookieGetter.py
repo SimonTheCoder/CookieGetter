@@ -24,7 +24,7 @@ class CookieGetter:
         self.domain_label.pack(side=tk.LEFT)
 
         self.domain_entry = tk.Entry(self.input_frame)
-        self.domain_entry.pack(fill=tk.X, padx=5, expand=True)
+        self.domain_entry.pack(side=tk.LEFT,fill=tk.X, padx=5, expand=True)
 
         self.get_button = tk.Button(self.input_frame, text="Get Cookies", command=self.get_cookies)
         self.get_button.pack(side=tk.RIGHT)

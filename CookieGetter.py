@@ -33,12 +33,17 @@ class CookieGetter:
         self.list_frame = tk.Frame(self.root)
         self.list_frame.pack(fill=tk.BOTH, padx=10, pady=10, expand=True)
 
-        self.filter_label = tk.Label(self.list_frame, text="Filter:")
-        self.filter_label.grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
+        self.filter_frame = tk.Frame(self.list_frame)
+        self.filter_label = tk.Label(self.filter_frame, text="Filter:")
+        # self.filter_label.grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
+        self.filter_label.pack(side=tk.LEFT)
 
-        self.filter_entry = tk.Entry(self.list_frame)
-        self.filter_entry.grid(row=0, column=1, padx=5, pady=5, sticky=tk.W)
+        self.filter_entry = tk.Entry(self.filter_frame)
+        # self.filter_entry.grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
         self.filter_entry.bind("<KeyRelease>", self.filter_cookies)
+        self.filter_entry.pack(side=tk.LEFT)
+
+        self.filter_frame.grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
 
         self.listbox = tk.Listbox(self.list_frame)
         self.listbox.grid(row=1, column=0, columnspan=2, padx=5, pady=5, sticky=tk.NSEW)

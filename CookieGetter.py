@@ -25,10 +25,33 @@ class CookieGetter:
 
         self.domain_entry = tk.Entry(self.input_frame)
         self.domain_entry.pack(side=tk.LEFT,fill=tk.X, padx=5, expand=True)
+        
 
         self.get_button = tk.Button(self.input_frame, text="Get Cookies", command=self.get_cookies)
         self.get_button.pack(side=tk.RIGHT)
+        
+        # Add browser select radio buttons
+        self.browser_frame = tk.Frame(self.input_frame)
+        self.browser_frame.pack(side=tk.LEFT, padx=10)
 
+        self.browser_label = tk.Label(self.browser_frame, text="Browser:")
+        self.browser_label.pack(side=tk.LEFT)
+
+        self.browser_var = tk.StringVar()
+
+        self.firefox_radio = tk.Radiobutton(self.browser_frame, text="Firefox", variable=self.browser_var, value="firefox")
+        self.firefox_radio.pack(side=tk.LEFT)
+
+        self.chrome_radio = tk.Radiobutton(self.browser_frame, text="Chrome", variable=self.browser_var, value="chrome")
+        self.chrome_radio.pack(side=tk.LEFT)
+
+        self.browser_var.set("firefox")  # Set default value to Firefox
+
+        # 创建中间列表控件
+        self.list_frame = tk.Frame(self.root)
+        self.list_frame.pack(fill=tk.BOTH, padx=10, pady=10, expand=True)
+
+        
         # 创建中间列表控件
         self.list_frame = tk.Frame(self.root)
         self.list_frame.pack(fill=tk.BOTH, padx=10, pady=10, expand=True)
@@ -55,7 +78,11 @@ class CookieGetter:
 
     def get_cookies(self):
         self.domain = self.domain_entry.get()
-        self.cookies = browser_cookie3.load(self.domain)
+        # self.cookies = browser_cookie3.load(self.domain)
+        if self.browser_var.get() == "firefox":
+            self.cookies = browser_cookie3.firefox()
+        elif self.browser_var.get() == "chrome":
+            self.cookies = browser_cookie3.chrome()
         self.filtered_cookies = self.cookies
         self.update_listbox()
 
